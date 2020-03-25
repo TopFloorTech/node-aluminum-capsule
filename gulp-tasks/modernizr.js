@@ -1,42 +1,45 @@
-/**
- * Created by BMcClure on 9/17/2016.
- */
-var modernizr = require('gulp-modernizr');
-var notify = require('gulp-notify');
-var uglify = require('gulp-uglify');
-var fs = require('fs');
-var path = require('path');
+var modernizrPlugin = require('gulp-modernizr')
+var notify = require('gulp-notify')
+var uglify = require('gulp-uglify')
+var fs = require('fs')
+var path = require('path')
 
 function generateModernizr(gulp, config) {
-    gulp.src(config.modernizr.sources)
-        .pipe(modernizr(config.modernizr.options))
+    return gulp.src(config.modernizr.sources)
+        .pipe(modernizrPlugin(config.modernizr.options))
         .pipe(uglify())
         .pipe(gulp.dest(config.paths.js))
         .pipe(notify({
             title: "Modernizr Generated",
             message: "A custom Modernizr file has been generated.",
             onLast: true
-        }));
+        }))
 }
 
 module.exports = function (gulp, config) {
-    gulp.task('modernizr', function () {
+    function modernizr_generate(done) {
         if (!config.modernizr.enabled) {
-            return;
+            done()
+            return
         }
 
-        fs.stat(path.join(config.paths.js, './modernizr.js'), function(err, stat) {
+        return generateModernizr(gulp, config)
+    }
+
+    function modernizr(done) {
+        if (!config.modernizr.enabled) {
+            done()
+            return
+        }
+
+        return fs.stat(path.join(config.paths.js, './modernizr.js'), function(err, stat) {
             if(err) {
-                generateModernizr(gulp, config);
+                generateModernizr(gulp, config)
             }
-        });
-    });
+        })
+    }
 
-    gulp.task('modernizer:generate', function () {
-        if (!config.modernizr.enabled) {
-            return;
-        }
+    gulp.task('modernizr:generate', modernizr_generate)
 
-        generateModernizr(gulp, config)
-    });
-};
+    gulp.task('modernizr', modernizr)
+}

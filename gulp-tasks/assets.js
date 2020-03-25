@@ -1,16 +1,8 @@
-/**
- * Created by ben on 11/1/16.
- */
 var changed = require('gulp-changed')
 var count = require('gulp-count')
 
 module.exports = function (gulp, config) {
-    gulp.task('assets', ['assets:copy'])
-
-    /**
-     * This task copies assets from other locations if they're different than what's already in the destination
-     */
-    gulp.task('assets:copy', function () {
+    function assets_copy(done) {
         for (var dest in config.assets) {
             if (config.assets.hasOwnProperty(dest)) {
                 if (config.assets[dest].length > 0) {
@@ -24,5 +16,14 @@ module.exports = function (gulp, config) {
                 }
             }
         }
-    })
+
+        done()
+    }
+
+    /**
+     * This task copies assets from other locations if they're different than what's already in the destination
+     */
+    gulp.task('assets:copy', assets_copy)
+
+    gulp.task('assets', gulp.series('assets:copy'))
 }

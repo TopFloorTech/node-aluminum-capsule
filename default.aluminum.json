@@ -11,13 +11,13 @@
         "iconsCss": "src/scss/icons"
     },
     "sources": {
-        "scss": "src/scss/**/*.scss",
+        "scss": ["src/scss/**/*.scss", "components/*/scss/**/*.scss"],
         "images": "images/**/*.+(jpeg|jpg|png|gif|svg)",
         "fonts": "src/fonts/*.{ttf,otf}",
-        "js": "src/js/**/*.js",
+        "js": ["src/js/**/*.js", "components/*/js/**/*.js"],
         "icons": "src/icons",
         "iconFiles": "*.svg",
-        "twig": "templates/**/*.html.twig"
+        "twig": ["templates/**/*.html.twig", "components/*/templates/**/*.html.twig"]
     },
     "gulp": {
         "includeTasks": [
@@ -50,7 +50,9 @@
         "watchDelay": 50,
         "alias": {
             "cc": "drush cc css-js",
-            "cr": "drush cr"
+            "cr": "drush cr",
+            "cex": "drush cex -y",
+            "cim": "drush cim -y"
         }
     },
     "icons": {
@@ -74,7 +76,7 @@
         "src": "",
         "cssFile": "_font-awesome.scss"
     },
-    "kbox": {
+    "lando": {
         "enabled": false
     },
     "modernizr": {
@@ -85,7 +87,9 @@
         },
         "sources": [
             "./src/js/**/*.js",
+            "./components/*/js/**.*.js",
             "./src/scss/**/*.scss",
+            "./components/*/scss/**/*.scss",
             "./js/**/*.js",
             "!./js/modernizr.js"
         ]
@@ -95,7 +99,7 @@
         "watch": true,
         "httpPrefix": "",
         "assetsPattern": "{css,fonts,images}/**/*",
-        "browserSupport": "last 2 versions",
+        "browsers": false,
         "includePaths": [
             "./css"
         ]

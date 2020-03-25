@@ -1,34 +1,40 @@
-/**
- * Created by BMcClure on 9/16/2016.
- */
-var fs = require("fs");
-var shell = require('gulp-shell');
-var notify = require('gulp-notify');
+var notify = require('gulp-notify')
+var exec = require('child_process').exec
 
-function drushCommand(command, gulp, config) {
+function drushCommand(command, gulp, config, done) {
     if (!config.drush.enabled) {
-        return;
+        done()
+        return
     }
 
-    if (config.kbox.enabled) {
-        command = "kbox " + command;
+    if (config.lando.enabled) {
+        command = "lando " + command
     }
 
-    return gulp.src('', {read: false})
-        .pipe(shell([command]))
-        .pipe(notify({
-            title: "Drush Command",
-            message: "Ran '" + command + "'",
-            onLast: true
-        }));
+    exec(command, function (err, stdout, stderr) {
+        done(err)
+    })
 }
 
 module.exports = function (gulp, config) {
-    gulp.task('drush:cc', function () {
-        return drushCommand(config.drush.alias.cc, gulp, config);
-    });
+    function drush_cc(done) {
+        return drushCommand(config.drush.alias.cc, gulp, config, done)
+    }
 
-    gulp.task('drush:cr', function () {
-        return drushCommand(config.drush.alias.cr, gulp, config);
-    });
-};
+    function drush_cr(done) {
+        return drushCommand(config.drush.alias.cr, gulp, config, done)
+    }
+
+    function drush_cex(done) {
+        return drushCommand(config.drush.alias.cex, gulp, config, done)
+    }
+
+    function drush_cim(done) {
+        return drushCommand(config.drush.alias.cim, gulp, config, done)
+    }
+
+    gulp.task('drush:cc', drush_cc)
+    gulp.task('drush:cr', drush_cr)
+    gulp.task('drush:cex', drush_cex)
+    gulp.task('drush:cim', drush_cim)
+}
