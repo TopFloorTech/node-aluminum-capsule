@@ -1,6 +1,6 @@
 {
     "name": "aluminum-capsule",
-    "version": "2.x-dev",
+    "version": "2.0.0",
     "description": "A full front-end build workflow backed by Webpack with optional tight integration with the Spacelift Drupal 8 theme.",
     "keywords": [
         "design system",
