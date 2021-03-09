@@ -97,7 +97,7 @@
 
         "browser-sync": "^2.16.0",
         "del": "^4.0.0",
-        "eyeglass": "^2.2.1",
+        "eyeglass": "^3.0.2",
         "fancy-log": "^1.3.3",
         "merge-options": "^1.0.1",
         "node-notifier": "^5.4.0",
@@ -146,6 +146,22 @@
         "react-test-renderer": "^17.0.1",
         "twig-testing-library": "^1.1.1",
         "yaml": "^1.10.0"
+    },
+    "scripts": {
+        "commit": "git-cz",
+        "lint": "eslint ./components",
+        "a11y": "npm run build-storybook && ./scripts/a11y.js -r",
+        "storybook": "start-storybook --ci -s ./dist,./images -p 6006",
+        "build-storybook": "npm run build && build-storybook -s ./dist,./images -o .out",
+        "deploy-storybook": "storybook-to-ghpages -o .out",
+        "webpack": "webpack --watch --config ./webpack/webpack.dev.js",
+        "build": "webpack --config ./webpack/webpack.prod.js",
+        "develop": "concurrently --raw \"npm run webpack\" \"npm run storybook\"",
+        "test": "jest --coverage",
+        "twatch": "jest --no-coverage --watch --verbose",
+        "coverage": "yarn test && open-cli .coverage/lcov-report/index.html",
+        "format": "prettier --write \"**/*.{js,yml,scss,md}\"",
+        "lint-staged": "lint-staged"
     },
     "config": {
         "commitizen": {

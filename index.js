@@ -34,5 +34,13 @@ module.exports = {
                 gulpTask(task, gulp, config)
             }
         })
+    },
+    webpack: {
+        'dev': function () {
+            return require('./webpack/webpack.dev')
+        },
+        'prod': function () {
+            return require('./webpack/webpack.prod')
+        }
     }
 }

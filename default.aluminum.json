@@ -1,14 +1,30 @@
 {
     "paths": {
-        "css": "css/",
-        "images": "images/",
-        "js": "js/",
-        "fonts": "fonts",
-        "maps": "maps/",
+        "baseComponents": "base-components",
+        "dist": {
+            "dir": "dist",
+            "css": "css",
+            "js": "js",
+            "fonts": "fonts",
+            "icons": "icons"
+        },
+        "src": {
+            "dir": "src",
+            "fonts": "fonts",
+            "icons": "icons",
+            "js": "js",
+            "scss": "scss"
+        },
+        "images": "images",
+
         "icons": "images/icons",
         "generatedScss": "src/scss/generated",
         "fontsCss": "src/scss/fonts",
         "iconsCss": "src/scss/icons"
+    },
+    "images": {
+        "loadImages": true,
+        "imageminEnabled": false
     },
     "sources": {
         "scss": ["src/scss/**/*.scss", "components/*/scss/**/*.scss"],
@@ -18,23 +34,6 @@
         "icons": "src/icons",
         "iconFiles": "*.svg",
         "twig": ["templates/**/*.html.twig", "components/*/templates/**/*.html.twig"]
-    },
-    "gulp": {
-        "includeTasks": [
-            "drush",
-            "font-awesome",
-            "fonts",
-            "icons",
-            "sass",
-            "scripts",
-            "modernizr",
-            "assets",
-            "browser-sync",
-            "build",
-            "watch",
-            "default"
-        ],
-        "excludeTasks": []
     },
     "assets": {},
     "browserSync": {
@@ -95,22 +94,40 @@
         ]
     },
     "sass": {
-        "enabled": false,
-        "watch": true,
         "httpPrefix": "",
         "assetsPattern": "{css,fonts,images}/**/*",
+
+        "enabled": false,
+        "watch": true,
         "browsers": false,
         "includePaths": [
             "./css"
         ]
     },
     "scripts": {
-        "enabled": false,
+        "enabled": true,
         "watch": true
     },
     "twig": {
         "enabled": false,
         "watch": true,
         "useCache": true
+    },
+    "gulp": {
+        "includeTasks": [
+            "drush",
+            "font-awesome",
+            "fonts",
+            "icons",
+            "sass",
+            "scripts",
+            "modernizr",
+            "assets",
+            "browser-sync",
+            "build",
+            "watch",
+            "default"
+        ],
+        "excludeTasks": []
     }
 }
