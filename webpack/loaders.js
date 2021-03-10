@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const globImporter = require('node-sass-glob-importer');
-const config = require('lib/config')()
+const config = require('../lib/config')()
 const rootDir = path.resolve('.')
 
 

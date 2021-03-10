@@ -2,7 +2,7 @@ const path = require('path')
 const glob = require('glob')
 const loaders = require('./loaders')
 const plugins = require('./plugins')
-const config = require('lib/config')()
+const config = require('../lib/config')()
 
 const webpackDir = path.resolve(__dirname)
 const rootDir = config.root
@@ -30,8 +30,8 @@ function getEntries() {
         });
     }
 
-    entries.svgSprite = path.resolve(webpackDir, 'svgSprite.js');
-    entries.css = path.resolve(webpackDir, 'css.js');
+    entries.svgSprite = rootDir + '/webpack/svgSprite.js'
+    entries.css = rootDir + '/webpack/css.js'
 
     return entries;
 }
