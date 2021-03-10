@@ -96,8 +96,8 @@
     "sass": {
         "httpPrefix": "",
         "assetsPattern": "{css,fonts,images}/**/*",
+        "enabled": true,
 
-        "enabled": false,
         "watch": true,
         "browsers": false,
         "includePaths": [

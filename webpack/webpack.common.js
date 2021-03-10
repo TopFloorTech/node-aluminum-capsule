@@ -26,14 +26,17 @@ function getEntries() {
         glob.sync(pattern).forEach((file) => {
             const filePath = file.split(patterns[key] + '/')[1]
 
-            if (!filePath.contains('/dist/')) {
+            if (!filePath.includes('/dist/')) {
                 const newfilePath = `${config.paths.dist.js}/${filePath.replace('.js', '')}`
                 entries[newfilePath] = file;
             }
         });
     }
 
-    entries.svgSprite = rootDir + '/webpack/svgSprite.js'
+    if (config.icons.enabled) {
+        entries.svgSprite = rootDir + '/webpack/svgSprite.js'
+    }
+
     entries.css = rootDir + '/webpack/css.js'
 
     return entries;
