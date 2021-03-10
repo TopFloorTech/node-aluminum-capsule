@@ -10,8 +10,8 @@ const glob = require('glob');
 const imagePath = path.resolve(__dirname, '../images');
 
 const MiniCssExtractPlugin = new _MiniCssExtractPlugin({
-  filename: 'style.css',
-  chunkFilename: '[id].css',
+  filename: 'css/app.css',
+  chunkFilename: 'css/[id].css',
 });
 
 const ImageminPlugin = new _ImageminPlugin({
