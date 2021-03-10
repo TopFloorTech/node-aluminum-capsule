@@ -37,25 +37,25 @@ const CSSLoader = {
         },
         {
             loader: 'sass-loader',
-            options: eyeglass({
+            options: {
                 sourceMap: true,
-                sassOptions: {
+                sassOptions: eyeglass({
                     importer: globImporter(),
                     outputStyle: 'compressed',
-                },
-                eyeglass: {
-                    root: rootDir,
-                    assets: {
-                        httpPrefix: config.sass.httpPrefix || path.relative('../../', './'),
-                        sources: [
-                            {
-                                directory: rootDir,
-                                pattern: config.sass.assetsPattern
-                            }
-                        ]
+                    eyeglass: {
+                        root: rootDir,
+                        assets: {
+                            httpPrefix: config.sass.httpPrefix || path.relative('../../', './'),
+                            sources: [
+                                {
+                                    directory: rootDir,
+                                    pattern: config.sass.assetsPattern
+                                }
+                            ]
+                        }
                     }
-                }
-            }),
+                }),
+            },
         },
     ],
 };
