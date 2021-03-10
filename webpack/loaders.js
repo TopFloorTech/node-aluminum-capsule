@@ -1,8 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const globImporter = require('node-sass-glob-importer');
 const config = require('../lib/config')()
+const path = require('path')
 const rootDir = path.resolve('.')
-
+const eyeglass = require('eyeglass')
 
 const JSLoader = {
     test: /^(?!.*\.(stories|component)\.js$).*\.js$/,

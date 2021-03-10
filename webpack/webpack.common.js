@@ -25,8 +25,11 @@ function getEntries() {
 
         glob.sync(pattern).forEach((file) => {
             const filePath = file.split(patterns[key] + '/')[1]
-            const newfilePath = `${config.paths.dist.js}/${filePath.replace('.js', '')}`
-            entries[newfilePath] = file;
+
+            if (!filePath.contains('/dist/')) {
+                const newfilePath = `${config.paths.dist.js}/${filePath.replace('.js', '')}`
+                entries[newfilePath] = file;
+            }
         });
     }
 
